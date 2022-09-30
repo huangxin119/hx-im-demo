@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package org.example.common.po;
+
+option optimize_for = SPEED;
+
+option java_package = "org.example.common.po";
+option java_outer_classname = "Online";
+
+message OnlineMessage {
+     string id = 1;
+     int64 userId = 2;
+     int32 userPlatformId = 3;
+     string userMacId = 4;
+     int64 receiveId = 5;
+     int64 timeStamp = 6;
+     MsgType msgType = 7;
+
+    enum MsgType {
+        ONLINE = 0;
+        OFFLINE = 1;
+    }
+}

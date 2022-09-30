@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package org.example.common.po;
+
+option optimize_for = SPEED;
+
+option java_package = "org.example.common.po";
+option java_outer_classname = "TestProto";
+
+message Student {
+    string name = 1;
+    int32 age = 2;
+    string address = 3;
+}

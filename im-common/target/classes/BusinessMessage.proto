@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package org.example.common.po;
+
+option optimize_for = SPEED;
+
+option java_package = "org.example.common.po";
+option java_outer_classname = "Business";
+
+message BusinessMessage {
+    string id = 1;
+    int64 userId = 2;
+    int32 userPlatformId = 3;
+    string userMacId = 4;
+    int64 receiveId = 5;
+    int64 timeStamp = 6;
+    string msgBody = 7;
+    bool needAck = 8;
+    int32 businessType = 9;
+}

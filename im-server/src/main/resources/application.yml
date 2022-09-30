@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+im:
+  server:
+    address: 127.0.0.1
+    port: 9090
+
+spring:
+  redis:
+    host: 175.178.29.54
+    port: 6379
+    password: hx123456
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://175.178.29.54:3306/im?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: hx123456
+mybatis-plus:
+  mapper-locations: classpath*:xml
+rocketmq:
+  nameServers: 175.178.29.54:9876
+  producer:
+    topic: im_inet_topic
+    topic2: im_business_topic
+    topic3: business_im_topic

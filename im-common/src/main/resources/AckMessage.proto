@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package org.example.common.po;
+
+option optimize_for = SPEED;
+
+option java_package = "org.example.common.po";
+option java_outer_classname = "Ack";
+
+message AckMessage {
+    string id = 1;
+    int64 userId = 2;
+    int64 receiveId = 3;
+    int64 messageType = 4;
+}
