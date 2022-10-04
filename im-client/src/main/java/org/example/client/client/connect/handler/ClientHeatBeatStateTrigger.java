@@ -36,6 +36,7 @@ public class ClientHeatBeatStateTrigger extends ChannelInboundHandlerAdapter {
                 log.info("客户端发送心跳");
                 ctx.channel().writeAndFlush(heartbeat);
             }else if(state==IdleState.READER_IDLE){
+                ctx.close();
                 log.info("服务端不可用，重连其他服务");
             }
         } else {
