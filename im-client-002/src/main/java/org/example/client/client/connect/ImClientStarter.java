@@ -4,8 +4,9 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.example.client.client.connect.handler.ClientHeatBeatPinger;
+import org.example.client.client.connect.handler.ClientHeatBeatStateTrigger;
 import org.example.client.client.connect.handler.IMClientMessageHandler;
 import org.example.common.coder.ProtoDecoder;
 import org.example.common.coder.ProtoEncoder;
@@ -36,11 +37,10 @@ public class ImClientStarter {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
-//                        pipeline.addLast("idleStatHandler",new IdleStateHandler(0,5,0));
-//                        pipeline.addLast("clientHeatBeatStateTrigger",new ClientHeatBeatStateTrigger(userId));
+                        pipeline.addLast("idleStatHandler",new IdleStateHandler(10,5,0));
+                        pipeline.addLast("clientHeatBeatStateTrigger",new ClientHeatBeatStateTrigger(userId));
                         pipeline.addLast("decoder",new ProtoDecoder());
                         pipeline.addLast("encoder",new ProtoEncoder());
-                        pipeline.addLast("heatbeat",new ClientHeatBeatPinger(userId));
                         pipeline.addLast("imClientMessageHandler",imClientMessageHandler);
                     }
                 }).connect(imServerAddress, imServerPort)

@@ -5,6 +5,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.example.server.server.redis.IRedisService;
+
+import javax.annotation.Resource;
 
 /**
  * @desc： 服务端断连触发器
@@ -13,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ServerHeatBeatStateTrigger extends ChannelInboundHandlerAdapter {
+    @Resource
+    private IRedisService iRedisService;
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         //监听到超时未收到心跳数据，主动断开连接
