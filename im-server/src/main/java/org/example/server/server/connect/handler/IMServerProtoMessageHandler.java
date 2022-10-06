@@ -39,9 +39,8 @@ public class IMServerProtoMessageHandler extends SimpleChannelInboundHandler<Mes
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Message message) throws Exception {
-        log.info("[server get message]:{}",message.toString());
+        //log.info("[server get message]:{}",message.toString());
         MessageTypeEnum messageTypeEnum = MessageTypeEnum.getByClass(message.getClass());
-        log.info("[server get messageType]:{}",messageTypeEnum.getClazz());
         MessageHandler messageHandler = protoMessageHandlerFactory.getMessageHandlerByType(messageTypeEnum);
         messageHandler.dealMessage(message,channelHandlerContext);
     }

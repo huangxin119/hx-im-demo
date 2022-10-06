@@ -55,7 +55,7 @@ public class IMClientImpl implements IMClient {
         }
         try {
             Online.OnlineMessage onlineMessage = Online.OnlineMessage.newBuilder()
-                    .setId("test")
+                    .setId("test-online")
                     .setMsgType(Online.OnlineMessage.MsgType.ONLINE)
                     .setTimeStamp(new Date().getTime())
                     .setUserId(userId).build();
@@ -75,7 +75,7 @@ public class IMClientImpl implements IMClient {
         }
         try {
             Online.OnlineMessage onlineMessage = Online.OnlineMessage.newBuilder()
-                    .setId("test")
+                    .setId("test-offline")
                     .setMsgType(Online.OnlineMessage.MsgType.OFFLINE)
                     .setTimeStamp(new Date().getTime())
                     .setUserId(userId).build();
@@ -95,6 +95,7 @@ public class IMClientImpl implements IMClient {
         }
         try {
             Business.BusinessMessage businessMessage = Business.BusinessMessage.newBuilder()
+                    .setId("test-bus")
                     .setUserId(userId)
                     .setMsgBody(message).build();
             channel.writeAndFlush(businessMessage);
@@ -111,7 +112,7 @@ public class IMClientImpl implements IMClient {
         }
         try {
             Chat.ChatMessage chatMessage = Chat.ChatMessage.newBuilder()
-                    .setId("test")
+                    .setId("test-chat")
                     .setUserId(userId)
                     .setReceiveId(receiveId)
                     .setMsgType(Chat.ChatMessage.MsgType.TEXT)
@@ -132,7 +133,7 @@ public class IMClientImpl implements IMClient {
         }
         try {
             Chat.ChatMessage chatMessage = Chat.ChatMessage.newBuilder()
-                    .setId("test")
+                    .setId("test-chat-ack")
                     .setUserId(userId)
                     .setReceiveId(receiveId)
                     .setMsgType(Chat.ChatMessage.MsgType.TEXT)

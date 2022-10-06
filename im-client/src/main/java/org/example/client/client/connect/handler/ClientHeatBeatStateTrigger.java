@@ -33,7 +33,7 @@ public class ClientHeatBeatStateTrigger extends ChannelInboundHandlerAdapter {
                         .setId("test")
                         .setUserId(userId)
                         .setTimeStamp(new Date().getTime()).build();
-                log.info("客户端发送心跳");
+                //log.info("客户端发送心跳");
                 ctx.channel().writeAndFlush(heartbeat);
             }else if(state==IdleState.READER_IDLE){
                 ctx.close();

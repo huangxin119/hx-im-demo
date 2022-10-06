@@ -19,8 +19,8 @@ public class HeartbeatProtoMessageHandler implements MessageHandler{
     @Override
     public void dealMessage(Message message, ChannelHandlerContext ctx) {
         HeartBeat.HeartbeatMessage heartbeatMessage = (HeartBeat.HeartbeatMessage) message;
-        //ctx.writeAndFlush(heartbeatMessage);
-        log.info("receive heartbeat id is "+heartbeatMessage.getId());
+        ctx.writeAndFlush(heartbeatMessage);
+        //log.info("receive heartbeat id is "+heartbeatMessage.getId());
     }
 
     @Override

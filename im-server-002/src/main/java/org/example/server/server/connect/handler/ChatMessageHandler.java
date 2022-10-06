@@ -33,6 +33,7 @@ public class ChatMessageHandler implements MessageHandler {
         Long receiveId = chatMessage.getReceiveId();
         String res = iRedisService.getValue(receiveId.toString());
         if(res==null){
+            //离线消息存储
             mqService.notifyBusiness("",message);
             return;
         }
