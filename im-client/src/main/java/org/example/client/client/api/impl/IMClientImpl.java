@@ -112,7 +112,7 @@ public class IMClientImpl implements IMClient {
         }
         try {
             Chat.ChatMessage chatMessage = Chat.ChatMessage.newBuilder()
-                    .setId("test-chat")
+                    .setId(String.valueOf(new Date()))
                     .setUserId(userId)
                     .setReceiveId(receiveId)
                     .setMsgType(Chat.ChatMessage.MsgType.TEXT)

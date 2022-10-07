@@ -32,11 +32,8 @@ public class ChatMessageHandler implements MessageHandler {
         log.info("receive chatMessage :{}",message);
         Long receiveId = chatMessage.getReceiveId();
         String res = iRedisService.getValue(receiveId.toString());
-        if(res==null){
-            //离线消息存储
-            mqService.notifyBusiness("",message);
-            return;
-        }
+        //业务方存储消息
+        mqService.notifyBusiness("",message);
         //判断receiveId是否在本节点，是则直接推送，否则交给transfer处理
         NioSocketChannel channel = SessionConnectPool.getChannelByUserId(receiveId.toString());
         if(channel!=null){
