@@ -5,7 +5,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
-import org.example.server.server.connect.util.SessionConnectPool;
 import org.example.server.server.redis.IRedisService;
 
 import javax.annotation.Resource;

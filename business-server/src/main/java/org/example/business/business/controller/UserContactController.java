@@ -3,7 +3,9 @@ package org.example.business.business.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.example.business.business.mapper.UserApplyMapper;
+import org.example.business.business.mapper.UserContactListMapper;
 import org.example.business.business.mapper.po.UserApplyPO;
+import org.example.business.business.mapper.po.UserContactListPO;
 import org.example.business.business.mq.MQService;
 import org.example.common.po.Business;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,19 @@ public class UserContactController {
     @Resource
     private UserApplyMapper userApplyMapper;
     @Resource
+    private UserContactListMapper userContactListMapper;
+    @Resource
     private MQService mqService;
 
     @PostMapping("/apply-friend")
     public String applyFriend(@RequestParam Integer userId, @RequestParam Integer receiveId){
+        QueryWrapper<UserApplyPO> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_id",userId);
+        queryWrapper.eq("receive_id",receiveId);
+        List<UserApplyPO> res = userApplyMapper.selectList(queryWrapper);
+        if(res!=null&&res.size()>0){
+            return "已经存在申请记录，不可重复申请";
+        }
         UserApplyPO userApplyPO = new UserApplyPO();
         userApplyPO.setUserId(userId);
         userApplyPO.setReceiveId(receiveId);
@@ -54,6 +65,16 @@ public class UserContactController {
         updateWrapper.eq("receive_id",receiveId);
         userApplyMapper.update(userApplyPO,updateWrapper);
         if(dealType==1){
+            UserContactListPO userContactListPO = new UserContactListPO();
+            userContactListPO.setUserId(userId);
+            userContactListPO.setSessionId(userId+"--"+receiveId);
+            userContactListPO.setSessionType(0);
+            userContactListMapper.insert(userContactListPO);
+            UserContactListPO userContactListPO2 = new UserContactListPO();
+            userContactListPO2.setUserId(receiveId);
+            userContactListPO2.setSessionId(userId+"--"+receiveId);
+            userContactListPO2.setSessionType(0);
+            userContactListMapper.insert(userContactListPO2);
             //发送一个初始化聊天栏的业务信息给申请者
             mqService.send("",Business.BusinessMessage.newBuilder().setId("test-init-chat").setUserId(receiveId).setReceiveId(userId).build());
             return "已同意好友申请";

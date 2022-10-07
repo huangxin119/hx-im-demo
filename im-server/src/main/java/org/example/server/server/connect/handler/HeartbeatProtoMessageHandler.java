@@ -5,7 +5,6 @@ import io.netty.channel.ChannelHandlerContext;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.po.HeartBeat;
 import org.example.common.po.MessageTypeEnum;
-import org.example.server.server.connect.util.ChannelPropertiesUtil;
 import org.springframework.stereotype.Component;
 
 /**
