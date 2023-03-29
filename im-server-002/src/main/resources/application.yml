@@ -8,18 +8,18 @@ im:
 
 spring:
   redis:
-    host: 175.178.29.54
+    host: xx.xx.xx.xx
     port: 6379
-    password: hx123456
+    password: xxxxxxxx
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://175.178.29.54:3306/im?characterEncoding=utf-8&useSSL=false
-    username: root
-    password: hx123456
+    url: jdbc:mysql://xx.xx.xx.xx:3306/im?characterEncoding=utf-8&useSSL=false
+    username: xxxxxxxx
+    password: xxxxxxxx
 mybatis-plus:
   mapper-locations: classpath*:xml
 rocketmq:
-  nameServers: 175.178.29.54:9876
+  nameServers: xx.xx.xx.xx:9876
   producer:
     topic: im_inet_topic
     topic2: im_business_topic
